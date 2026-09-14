@@ -66,5 +66,3 @@ See `assets/CREDITS.txt`.
 ## License
 
 [GNU General Public License v2.0](LICENSE)
-
-Because this reuses friedkeenan's patcher (and ships Hekate / Atmosphère art), any public release must stay GPL-2.0 and include this source plus the license.
