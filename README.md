@@ -1,37 +1,39 @@
-# Boot Toaster NX (web)
 
-Static page. Images stay in the browser. No server.
+<div align="center">[https://bshurikan.github.io/boot-toaster-nx/](<img width="512" alt="toaster" src="https://github.com/user-attachments/assets/22c891ff-6b6f-454e-9b0c-a95ec28cf751" />)</div>
 
-## GitHub Pages (free)
+# [Boot Toaster NX](https://bshurikan.github.io/boot-toaster-nx/)
 
-Pages is free on a **public** repo. A private repo needs a paid GitHub plan.
+Create Nintendo Switch **Atmosphere boot-logo patches** and a **Hekate splash** via the web.
 
-Do this yourself so Cursor is not a contributor:
+No GitHub account, fork, pull request, or wait. Pick images, click **Create for SD**, copy the folders onto your SD card.
 
-1. On GitHub, **New repository**. Name example: `boot-toaster-nx`. Public.
-2. Do **not** add a README/license on GitHub (empty repo).
-3. Copy everything inside this `web` folder into a new empty folder.
-4. In that folder:
+<img width="952" height="1880" alt="image" src="https://github.com/user-attachments/assets/047b0c6f-d61e-4d61-a0da-6a38b42bf11d" />
 
-```text
-git init -b main
-git add .
-git commit -m "Add Boot Toaster NX web app."
-git remote add origin https://github.com/YOURUSER/boot-toaster-nx.git
-git push -u origin main
-```
+This is a local companion to [RobZilla10001's Automatic BootLogo Creator](https://gbatemp.net/threads/automatic-bootlogo-creator.684230/). The IPS math comes from [friedkeenan/switch-logo-patcher](https://github.com/friedkeenan/switch-logo-patcher).
 
-5. GitHub: **Settings → Pages**
-   - Source: **Deploy from a branch**
-   - Branch: `main` / **/** (root)
-   - Save
+## What you need
 
-Live URL: `https://YOURUSER.github.io/boot-toaster-nx/`
+- A modded Switch running Atmosphere / Hekate
+- Any image (PNG, JPG, WebP, BMP). Size is fitted for you
 
-## Local preview
+The window shows two 16:9 boot previews:
 
-```text
-python -m http.server 8080
-```
+| Order | Screen | What it replaces | SD path |
+|---|---|---|---|
+| 1 | Hekate splash | First screen if you boot through Hekate | `bootloader/bootlogo.bmp` |
+| 2 | Atmosphère triangle | Small stock AMS mark. Needs a rebuild of Atmosphère | not an SD drop-in |
+| 3 | Switch logo | Nintendo logo during Horizon boot | `atmosphere/exefs_patches/logo/*.ips` |
 
-Then open http://localhost:8080
+Until you pick an image, each side shows a layout placeholder. **That side is not exported.** Nintendo's official logo is not included (trademark). Placeholders are preview-only.
+
+If you boot through Hekate `pkg3`/`fss0` (the usual setup), the full-screen Atmosphère/fusee splash never appears. The stock triangle still does - that is baked into `boot.kip` and cannot be replaced with an SD drop-in.
+
+For the full boot-order writeup, see [binkinator's Splash Screens blog](https://gbatemp.net/blogs/splash-screens.19288/). The app footer link **Boot screens explained** opens the same page.
+
+## Use it
+
+1. Run the latest [LocalBootLogoCreator.exe](https://github.com/bshurikan/local-bootlogo-creator/releases/)
+2. Click a preview (or **Choose image**) on one or both sides
+3. Click **Create for SD**
+4. Copy the output folders onto the SD card (merge)
+5. For the Hekate splash, edit `sd:/bootloader/hekate_ipl.ini` (see **INSTRUCTIONS** on the splash card):
