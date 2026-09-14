@@ -6,7 +6,7 @@
 
 No GitHub account, fork, pull request, or wait. 
 
-Pick images, click **Create for SD**, copy the folders onto your SD card.
+Pick your images, click **Create for SD**, and copy to your SD card.
 
 <a href="https://bshurikan.github.io/boot-toaster-nx/"><img width="400" alt="image" src="https://github.com/user-attachments/assets/047b0c6f-d61e-4d61-a0da-6a38b42bf11d" /></a>
 
