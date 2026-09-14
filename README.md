@@ -2,13 +2,13 @@
 
 # <a href="https://bshurikan.github.io/boot-toaster-nx/"><img src="https://github.com/user-attachments/assets/22c891ff-6b6f-454e-9b0c-a95ec28cf751" width="32" alt="Icon"></a> Boot Toaster NX
 
-[![Open Boot Toaster NX](https://img.shields.io/badge/Open_the_app-7aa2ff?style=for-the-badge)](https://bshurikan.github.io/boot-toaster-nx/)
-
 ### **Atmosphere boot-logo patches** & **Hekate splash** generator
 
 No GitHub account, fork, pull request, or wait. 
 
 Pick your images, click **Create for SD**, and copy to your SD card.
+
+[![Open Boot Toaster NX](https://img.shields.io/badge/Open_the_app-7aa2ff?style=for-the-badge)](https://bshurikan.github.io/boot-toaster-nx/)
 
 <a href="https://bshurikan.github.io/boot-toaster-nx/"><img width="400" alt="image" src="https://github.com/user-attachments/assets/047b0c6f-d61e-4d61-a0da-6a38b42bf11d" /></a>
 
