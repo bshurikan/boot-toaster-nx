@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Boot Toaster NX</title>
+    <meta name="description" content="Make a custom Switch boot logo and Hekate splash in your browser. Nothing is uploaded." />
+    <link rel="icon" href="./assets/toaster.png" type="image/png" />
+    <link rel="apple-touch-icon" href="./assets/toaster.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="brand">
+        <img class="logo" src="./assets/toaster.png" width="120" height="120" alt="Boot Toaster NX" />
+        <h1>Boot Toaster NX</h1>
+        <p class="lede">Drop in art, download files for your SD card.</p>
+      </header>
+
+      <div class="drops">
+        <section class="panel" data-kind="logo">
+          <div class="panel-top">
+            <div>
+              <h2>Switch logo</h2>
+              <p class="meta">Nintendo mark during boot</p>
+            </div>
+            <button class="linkish switch-focus-ring" type="button" data-help="logo">How to install</button>
+          </div>
+          <button class="drop switch-focus-ring" type="button" data-pick="logo" aria-label="Choose Switch logo image">
+            <canvas id="logo-preview"></canvas>
+            <span class="drop-hint" id="logo-file">Drop an image or tap to browse</span>
+          </button>
+          <div class="panel-bar">
+            <button class="ghost switch-focus-ring" type="button" data-reset="logo">Reset</button>
+            <div class="seg" data-fit="logo">
+              <button class="switch-focus-ring on" type="button" data-mode="contain">Fit</button>
+              <button class="switch-focus-ring" type="button" data-mode="cover">Fill</button>
+              <button class="switch-focus-ring" type="button" data-mode="stretch">Stretch</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel" data-kind="splash">
+          <div class="panel-top">
+            <div>
+              <h2>Hekate splash</h2>
+              <p class="meta">First screen on emuMMC boot</p>
+            </div>
+            <button class="linkish switch-focus-ring" type="button" data-help="splash">How to install</button>
+          </div>
+          <button class="drop switch-focus-ring" type="button" data-pick="splash" aria-label="Choose Hekate splash image">
+            <canvas id="splash-preview"></canvas>
+            <span class="drop-hint" id="splash-file">Drop an image or tap to browse</span>
+          </button>
+          <div class="panel-bar">
+            <button class="ghost switch-focus-ring" type="button" data-reset="splash">Reset</button>
+            <div class="seg" data-fit="splash">
+              <button class="switch-focus-ring" type="button" data-mode="contain">Fit</button>
+              <button class="switch-focus-ring on" type="button" data-mode="cover">Fill</button>
+              <button class="switch-focus-ring" type="button" data-mode="stretch">Stretch</button>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="cta">
+        <button class="primary switch-focus-ring" id="create" type="button">Create for SD</button>
+        <p class="status" id="status">Set images above, then Create for SD.</p>
+      </div>
+
+      <footer>
+        <a class="switch-focus-ring" href="https://gbatemp.net/blogs/splash-screens.19288/" target="_blank" rel="noreferrer">Boot screens explained</a>
+        <span aria-hidden="true">·</span>
+        <a class="switch-focus-ring" href="https://github.com/friedkeenan/switch-logo-patcher" target="_blank" rel="noreferrer">friedkeenan · GPL-2.0</a>
+      </footer>
+    </div>
+
+    <dialog id="help">
+      <h3>How to install</h3>
+      <div id="help-body"></div>
+      <div class="dialog-actions">
+        <button class="primary compact switch-focus-ring" id="help-close" type="button">Close</button>
+      </div>
+    </dialog>
+
+    <input id="file" type="file" accept="image/*" hidden />
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
