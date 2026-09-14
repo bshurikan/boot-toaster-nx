@@ -38,11 +38,11 @@ For the full boot-order writeup, see [binkinator's Splash Screens blog](https://
 
 1. Visit [Boot Toaster NX](https://bshurikan.github.io/boot-toaster-nx/)
 2. Click a preview and choose your image for one or both
-3. Click **Create for SD** it will download automatically
+3. Click **Create for SD** and it will download automatically
 4. Copy the output folders onto the SD card (merge)
-5. For the Hekate splash, edit `sd:/bootloader/hekate_ipl.ini` (see **INSTRUCTIONS** the web page):
+5. For the Hekate splash, edit `sd:/bootloader/hekate_ipl.ini` (see **INSTRUCTIONS** on the web page):
 
-```ini
+```hekate_ipl.ini
 [config]
 bootwait=3
 
