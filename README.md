@@ -3,14 +3,15 @@
 # <a href="https://bshurikan.github.io/boot-toaster-nx/"><img src="https://github.com/user-attachments/assets/22c891ff-6b6f-454e-9b0c-a95ec28cf751" width="32" alt="Icon"></a> Boot Toaster NX
 
 ### **Atmosphere boot-logo patches** & **Hekate splash** generator
-<br>
-</div>
 
 No GitHub account, fork, pull request, or wait. 
 
 Pick images, click **Create for SD**, copy the folders onto your SD card.
 
 <a href="https://bshurikan.github.io/boot-toaster-nx/"><img width="400" alt="image" src="https://github.com/user-attachments/assets/047b0c6f-d61e-4d61-a0da-6a38b42bf11d" /></a>
+
+<br>
+</div>
 
 This is a local companion to [RobZilla10001's Automatic BootLogo Creator](https://gbatemp.net/threads/automatic-bootlogo-creator.684230/). The IPS math comes from [friedkeenan/switch-logo-patcher](https://github.com/friedkeenan/switch-logo-patcher).
 
