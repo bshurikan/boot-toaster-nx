@@ -1,5 +1,5 @@
 
-<div align="center"><img width="150" alt="toaster" src="https://github.com/user-attachments/assets/22c891ff-6b6f-454e-9b0c-a95ec28cf751" /></div>
+<div align="center"><img width="100" alt="toaster" src="https://github.com/user-attachments/assets/22c891ff-6b6f-454e-9b0c-a95ec28cf751" /></div>
 
 # Boot Toaster NX
 
