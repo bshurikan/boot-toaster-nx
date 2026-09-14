@@ -1,5 +1,10 @@
+<div align="center">
 
-<div align="center"><img width="100" alt="toaster" src="https://github.com/user-attachments/assets/22c891ff-6b6f-454e-9b0c-a95ec28cf751" /></div>
+# <a href="https://bshurikan.github.io/boot-toaster-nx/"><img src="https://github.com/user-attachments/assets/22c891ff-6b6f-454e-9b0c-a95ec28cf751" width="32" alt="Icon"></a> Boot Toaster NX
+
+### **Atmosphere boot-logo patches** & **Hekate splash** generator
+<br>
+</div>
 
 # Boot Toaster NX
 
