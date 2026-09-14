@@ -39,7 +39,7 @@ For the full boot-order writeup, see [binkinator's Splash Screens blog](https://
 2. Click a preview and choose your image for one or both
 3. Click **Create for SD** it will download automatically
 4. Copy the output folders onto the SD card (merge)
-5. For the Hekate splash, edit `sd:/bootloader/hekate_ipl.ini` (see **INSTRUCTIONS** on the splash card):
+5. For the Hekate splash, edit `sd:/bootloader/hekate_ipl.ini` (see **INSTRUCTIONS** the web page):
 
 ```ini
 [config]
@@ -48,30 +48,6 @@ bootwait=3
 [CFW - emuMMC]
 logopath=bootloader/bootlogo.bmp
 ```
-
-6. Reboot through Hekate
-
-Output lands in `output\<image-name>\`:
-
-```text
-atmosphere/exefs_patches/logo/*.ips   (only if you picked a Switch logo)
-bootloader/bootlogo.bmp               (only if you picked a Hekate splash)
-logo_308x350.png
-splash_1280x720.png
-COPY_TO_SD.txt
-```
-Fusee-only users can still patch `atmosphere/package3` from the CLI (Hekate skips this):
-
-```text
-python SwitchBootLogo.py --splash mysplash.png --splash-target atmosphere --package3 D:\atmosphere\package3
-python SwitchBootLogo.py --splash mysplash.png --splash-target both --package3 D:\atmosphere\package3
-```
-
-Add `--zip` if you also want `bootlogo-sd.zip`.
-
-## Optional smaller IPS patches
-
-If you already dumped the original 308×350 Nintendo logo from firmware, pass it with `-o`. You do **not** need this. Without it, each IPS file is larger (~400 KB) and still works.
 
 ## Credits
 
