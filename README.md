@@ -10,7 +10,8 @@ Pick your images, click **Create for SD**, and copy to your SD card.
 
 [![Open Boot Toaster NX](https://img.shields.io/badge/Open_the_app-7aa2ff?style=for-the-badge)](https://bshurikan.github.io/boot-toaster-nx/)
 
-<a href="https://bshurikan.github.io/boot-toaster-nx/"><img width="400" alt="image" src="https://github.com/user-attachments/assets/047b0c6f-d61e-4d61-a0da-6a38b42bf11d" /></a>
+<img width="400" alt="app preview" src="https://github.com/user-attachments/assets/0b59b530-09a8-4319-99bd-0cd357aff391" />
+
 
 <br>
 </div>
