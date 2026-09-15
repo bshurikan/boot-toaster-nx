@@ -30,7 +30,7 @@ The window shows two 16:9 boot previews:
 | 2 | Atmosphère triangle | Small stock AMS mark. Needs a rebuild of Atmosphère | not an SD drop-in |
 | 3 | Switch logo | Nintendo logo during Horizon boot | `atmosphere/exefs_patches/logo/*.ips` |
 
-Until you pick an image, each side shows a layout placeholder. **That side is not exported.** Nintendo's official logo is not included (trademark). Placeholders are preview-only.
+Until you pick an image, placeholders are shown. **Only images you add will be exported**. Nintendo's official logo is not included (trademark). Placeholders are preview-only.
 
 For the full boot-order writeup, see [binkinator's Splash Screens blog](https://gbatemp.net/blogs/splash-screens.19288/). The app footer link **Boot screens explained** opens the same page.
 
