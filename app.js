@@ -8,6 +8,7 @@ import {
   writeHekateBmp,
 } from "./core.js";
 import { buildZip, downloadBytes } from "./zip.js";
+import "./bg.js";
 
 const PLACEHOLDERS = {
   logo: "./assets/badpeach.png",
@@ -60,19 +61,23 @@ function fitted(kind) {
 function paintPreview(kind) {
   const src = fitted(kind);
   const canvas = document.getElementById(`${kind}-preview`);
-  const w = Math.max(1, canvas.clientWidth || canvas.parentElement.clientWidth);
-  const h = Math.max(1, Math.round((w * 9) / 16));
-  canvas.width = w;
-  canvas.height = h;
+  const cssW = Math.max(1, canvas.clientWidth || canvas.parentElement.clientWidth);
+  const cssH = Math.max(1, Math.round((cssW * 9) / 16));
+  const dpr = Math.min(window.devicePixelRatio || 1, 3);
+  canvas.width = Math.round(cssW * dpr);
+  canvas.height = Math.round(cssH * dpr);
   const ctx = canvas.getContext("2d");
-  ctx.fillStyle = "#25262b";
-  ctx.fillRect(0, 0, w, h);
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = "high";
+  ctx.fillStyle = kind === "logo" ? "#000000" : "#25262b";
+  ctx.fillRect(0, 0, cssW, cssH);
   if (kind === "logo") {
-    const lw = Math.round((LOGO_W / SPLASH_W) * w);
-    const lh = Math.round((LOGO_H / SPLASH_H) * h);
-    ctx.drawImage(src, (w - lw) / 2, (h - lh) / 2, lw, lh);
+    const lw = (LOGO_W / SPLASH_W) * cssW;
+    const lh = (LOGO_H / SPLASH_H) * cssH;
+    ctx.drawImage(src, (cssW - lw) / 2, (cssH - lh) / 2, lw, lh);
   } else {
-    ctx.drawImage(src, 0, 0, w, h);
+    ctx.drawImage(src, 0, 0, cssW, cssH);
   }
 }
 
