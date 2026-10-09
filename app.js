@@ -3,12 +3,18 @@ import {
   LOGO_H,
   SPLASH_W,
   SPLASH_H,
+  LOGO_FW_THROUGH,
   prepareCanvas,
   generatePatches,
   writeHekateBmp,
 } from "./core.js";
 import { buildZip, downloadBytes } from "./zip.js";
 import "./bg.js";
+
+const logoMeta = document.getElementById("logo-meta");
+if (logoMeta) {
+  logoMeta.textContent = `Works through firmware ${LOGO_FW_THROUGH}`;
+}
 
 const PLACEHOLDERS = {
   logo: "./assets/badpeach.png",
