@@ -58,6 +58,85 @@ function loadImage(src) {
   });
 }
 
+function readAsDataURL(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = () => reject(new Error("Could not read image file"));
+    reader.readAsDataURL(file);
+  });
+}
+
+function isImageFile(file) {
+  if (!file) return false;
+  if (file.type && file.type.startsWith("image/")) return true;
+  // Some Android / Switch browsers leave type empty on drag-drop.
+  return /\.(png|jpe?g|gif|webp|bmp|svg)$/i.test(file.name || "");
+}
+
+function copyToCanvas(drawable) {
+  const w = drawable.naturalWidth || drawable.width;
+  const h = drawable.naturalHeight || drawable.height;
+  if (!w || !h) throw new Error("Image decoded with zero size");
+  const canvas = document.createElement("canvas");
+  canvas.width = w;
+  canvas.height = h;
+  canvas.getContext("2d").drawImage(drawable, 0, 0);
+  if (typeof drawable.close === "function") {
+    try {
+      drawable.close();
+    } catch (_) {
+      /* ignore */
+    }
+  }
+  return canvas;
+}
+
+function canvasHasVisiblePixels(canvas) {
+  const { data } = canvas.getContext("2d").getImageData(0, 0, canvas.width, canvas.height);
+  for (let i = 3; i < data.length; i += 4) {
+    if (data[i] > 8) return true;
+  }
+  return false;
+}
+
+/** Decode a local file into an owned canvas. Avoids blob-URL revoke races on Android. */
+async function loadFileImage(file) {
+  let canvas = null;
+
+  if (typeof createImageBitmap === "function") {
+    try {
+      canvas = copyToCanvas(await createImageBitmap(file));
+    } catch (_) {
+      canvas = null;
+    }
+  }
+
+  if (!canvas || !canvasHasVisiblePixels(canvas)) {
+    try {
+      canvas = copyToCanvas(await loadImage(await readAsDataURL(file)));
+    } catch (_) {
+      canvas = null;
+    }
+  }
+
+  if (!canvas || !canvasHasVisiblePixels(canvas)) {
+    const url = URL.createObjectURL(file);
+    try {
+      canvas = copyToCanvas(await loadImage(url));
+    } finally {
+      URL.revokeObjectURL(url);
+    }
+  }
+
+  if (!canvas || !canvasHasVisiblePixels(canvas)) {
+    throw new Error(
+      "Image appears blank after loading. This browser may not decode local images correctly — try again or use another device."
+    );
+  }
+  return canvas;
+}
+
 function fitted(kind) {
   const side = state[kind];
   if (kind === "logo") return prepareCanvas(side.img, LOGO_W, LOGO_H, side.mode, "transparent");
@@ -107,17 +186,19 @@ async function reset(kind) {
 }
 
 async function setCustom(kind, file) {
-  const url = URL.createObjectURL(file);
   try {
-    state[kind].img = await loadImage(url);
-  } finally {
-    URL.revokeObjectURL(url);
+    statusEl.textContent = "Loading image…";
+    state[kind].img = await loadFileImage(file);
+    state[kind].file = file;
+    state[kind].custom = true;
+    document.getElementById(`${kind}-file`).textContent = file.name;
+    requestAnimationFrame(() => paintPreview(kind));
+    updateStatus();
+  } catch (err) {
+    console.error(err);
+    statusEl.textContent = "Could not load image.";
+    alert(err.message || String(err));
   }
-  state[kind].file = file;
-  state[kind].custom = true;
-  document.getElementById(`${kind}-file`).textContent = file.name;
-  requestAnimationFrame(() => paintPreview(kind));
-  updateStatus();
 }
 
 function pick(kind) {
@@ -172,7 +253,7 @@ document.querySelectorAll(".drop").forEach((el) => {
     ev.preventDefault();
     el.classList.remove("drag");
     const file = ev.dataTransfer && ev.dataTransfer.files && ev.dataTransfer.files[0];
-    if (file && file.type.startsWith("image/")) setCustom(kind, file);
+    if (isImageFile(file)) setCustom(kind, file);
   });
 });
 
@@ -189,11 +270,23 @@ document.getElementById("create").addEventListener("click", async () => {
       "",
     ];
     if (state.logo.custom) {
-      Object.assign(files, generatePatches(fitted("logo")));
+      const logoCanvas = fitted("logo");
+      if (!canvasHasVisiblePixels(logoCanvas)) {
+        throw new Error(
+          "Switch logo looks blank — not exporting. Re-drop the image or try another browser."
+        );
+      }
+      Object.assign(files, generatePatches(logoCanvas));
       notes.push("atmosphere/exefs_patches/logo/");
     }
     if (state.splash.custom) {
-      files["bootloader/bootlogo.bmp"] = writeHekateBmp(fitted("splash"));
+      const splashCanvas = fitted("splash");
+      if (!canvasHasVisiblePixels(splashCanvas)) {
+        throw new Error(
+          "Hekate splash looks blank — not exporting. Re-drop the image or try another browser."
+        );
+      }
+      files["bootloader/bootlogo.bmp"] = writeHekateBmp(splashCanvas);
       notes.push("bootloader/bootlogo.bmp");
       notes.push("");
       notes.push("Edit sd:/bootloader/hekate_ipl.ini:");
