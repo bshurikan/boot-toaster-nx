@@ -131,7 +131,7 @@ async function loadFileImage(file) {
 
   if (!canvas || !canvasHasVisiblePixels(canvas)) {
     throw new Error(
-      "Image appears blank after loading. This browser may not decode local images correctly — try again or use another device."
+      "Image appears blank after loading. This browser may not decode local images correctly - try again or use another device."
     );
   }
   return canvas;
@@ -273,7 +273,7 @@ document.getElementById("create").addEventListener("click", async () => {
       const logoCanvas = fitted("logo");
       if (!canvasHasVisiblePixels(logoCanvas)) {
         throw new Error(
-          "Switch logo looks blank — not exporting. Re-drop the image or try another browser."
+          "Switch logo looks blank - not exporting. Re-drop the image or try another browser."
         );
       }
       Object.assign(files, generatePatches(logoCanvas));
@@ -283,7 +283,7 @@ document.getElementById("create").addEventListener("click", async () => {
       const splashCanvas = fitted("splash");
       if (!canvasHasVisiblePixels(splashCanvas)) {
         throw new Error(
-          "Hekate splash looks blank — not exporting. Re-drop the image or try another browser."
+          "Hekate splash looks blank - not exporting. Re-drop the image or try another browser."
         );
       }
       files["bootloader/bootlogo.bmp"] = writeHekateBmp(splashCanvas);
